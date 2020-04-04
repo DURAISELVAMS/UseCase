@@ -10,6 +10,8 @@ using OSIsoft.AF.Data;
 using OSIsoft.AF.Search;
 using OSIsoft.AF.Time;
 using OSIsoft.AF.PI;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace PI_Connect
 {
@@ -20,11 +22,12 @@ namespace PI_Connect
             try
             {
                 PISystems piSystems = new PISystems();
-                string AFServer = "PIAFSVR001";
+                string AFServer = ConfigurationManager.AppSettings.Get("AFServer");
                 PISystem assetServer = piSystems[AFServer];
 
+
                 PIServers piServers = new PIServers();
-                string PIServer = "PISVR01";
+                string PIServer = ConfigurationManager.AppSettings.Get("DataArchiveServer");
                 PIServer piServer = piServers[PIServer];
 
                 //AFElement.LoadAttributes()
@@ -44,7 +47,7 @@ namespace PI_Connect
                 if (assetServer != null && piServer != null)
                 {
                     //AFDatabase database = assetServer.Databases["Demo UOG Well Drilling & Completion Monitoring"];
-                    AFDatabase database = assetServer.Databases["AARA OEE Demo"];
+                    //AFDatabase database = assetServer.Databases["AARA OEE Demo"];
 
 
                     // PrintElementTemplates(database);
@@ -60,17 +63,19 @@ namespace PI_Connect
                     // Program6.CreateFeederElements(database);
 
                     //DataPipeSubscribeExample.Run(piServer);
-                    Console.WriteLine("Connected Successfully to AF Server: {0} and PI Server: {1}", PIServer, AFServer);
-                    UseCase_DataPipe.Run(piServer);
+                    Console.WriteLine("Connected Successfully to PI Server: {0} and AF Server: {1}", PIServer, AFServer);
+                    //Subscribe.DataPipeSubscribeExample.Run1();
+                   UseCase_DataPipe.Run(piServer);
                     Console.ReadLine();
-
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
 
@@ -89,10 +94,12 @@ namespace PI_Connect
                 }
                 Console.WriteLine();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
 
@@ -111,10 +118,12 @@ namespace PI_Connect
                 }
                 Console.WriteLine();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
         }
@@ -133,10 +142,12 @@ namespace PI_Connect
                 }
                 Console.WriteLine();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
         }
@@ -161,10 +172,12 @@ namespace PI_Connect
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
         }
@@ -194,10 +207,12 @@ namespace PI_Connect
                 }
                 Console.WriteLine();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
 
@@ -223,10 +238,12 @@ namespace PI_Connect
                     Console.WriteLine();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
         }
@@ -248,10 +265,12 @@ namespace PI_Connect
                 }
                 Console.WriteLine();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logs Err = new Logs();
+                Err.MyLogFile(ex);
+                Console.WriteLine("An Error has occured for details please check the Log File: '" + ex.Message + "'");
+                Console.ReadLine();
             }
 
         }
